@@ -18,10 +18,11 @@ namespace ECommerceApi.Persistance
         public static void AddPersistanceService(this IServiceCollection services)
         {
 
-            services.AddDbContext<ECommerceAPIDbContext>(options => options.UseNpgsql(Configurations.ConnectionString ),ServiceLifetime.Scoped);
+            services.AddDbContext<ECommerceAPIDbContext>(options => options.UseNpgsql(Configurations.ConnectionString ),ServiceLifetime.Singleton);
 
-            services.AddScoped<ICustomerReadRepository, CustomerReadRepository>();
-            services.AddScoped<ICustomerWriteRepository, CustomerWriteRepository>();
+            services.AddSingleton<ICustomerReadRepository, CustomerReadRepository>();
+            services.AddSingleton<ICustomerWriteRepository, CustomerWriteRepository>(); 
+            services.AddSingleton<IOrdersWriteRepository, OrderWriteRepository>();
 
         }
 

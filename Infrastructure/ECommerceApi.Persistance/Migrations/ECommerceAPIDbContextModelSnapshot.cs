@@ -34,6 +34,9 @@ namespace ECommerceApi.Persistance.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("text");
 
+                    b.Property<DateTime>("UpdatedDate")
+                        .HasColumnType("timestamp with time zone");
+
                     b.HasKey("Id");
 
                     b.ToTable("Customers");
@@ -51,15 +54,21 @@ namespace ECommerceApi.Persistance.Migrations
                     b.Property<DateTime>("CreatedDay")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<Guid?>("CustomerId")
+                    b.Property<string>("CustomerId")
+                        .HasColumnType("text");
+
+                    b.Property<Guid?>("CustomerId1")
                         .HasColumnType("uuid");
 
                     b.Property<string>("Description")
                         .HasColumnType("text");
 
+                    b.Property<DateTime>("UpdatedDate")
+                        .HasColumnType("timestamp with time zone");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("CustomerId");
+                    b.HasIndex("CustomerId1");
 
                     b.ToTable("Orders");
                 });
@@ -81,6 +90,9 @@ namespace ECommerceApi.Persistance.Migrations
 
                     b.Property<int>("Stock")
                         .HasColumnType("integer");
+
+                    b.Property<DateTime>("UpdatedDate")
+                        .HasColumnType("timestamp with time zone");
 
                     b.HasKey("Id");
 
@@ -106,7 +118,7 @@ namespace ECommerceApi.Persistance.Migrations
                 {
                     b.HasOne("ECommerceApi.Domain.Entities.Customers", "Customer")
                         .WithMany("Orders")
-                        .HasForeignKey("CustomerId");
+                        .HasForeignKey("CustomerId1");
 
                     b.Navigation("Customer");
                 });

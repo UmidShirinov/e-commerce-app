@@ -11,23 +11,21 @@ namespace ECommerceApi.API.Controllers
     {
         private readonly ICustomerWriteRepository _customerWriteRepository;
         private readonly ICustomerReadRepository _customerReadRepository;
-        public CustomerController(ICustomerReadRepository customerReadRepository, ICustomerWriteRepository customerWriteRepository)
+        private readonly IOrdersWriteRepository _ordersWriteRepository;
+        public CustomerController(ICustomerReadRepository customerReadRepository, ICustomerWriteRepository customerWriteRepository, IOrdersWriteRepository ordersWriteRepository)
         {
             _customerReadRepository = customerReadRepository;
             _customerWriteRepository = customerWriteRepository;
-
+            _ordersWriteRepository = ordersWriteRepository;
         }
 
 
         [HttpGet]
-        public void Get()
-        {
-            _customerWriteRepository.AddRangeAsync(new()
-            {
-                new(){Id=Guid.NewGuid() , CreatedDay=DateTime.UtcNow,Name="Product 1" } }
-                );
-
-            _customerWriteRepository.SaveAsync();
+        public async void Get()
+        {   var customerId=Guid.NewGuid();  
+            await _customerWriteRepository.AddAsync(new() { Id=customerId,Name="umid"});
+           await _ordersWriteRepository.AddAsync(new() {Description="ad" , Id=Guid.NewGuid() , Address="asdad",CustomerId=customerId.ToString()  });
+            await _ordersWriteRepository.SaveAsync();
         }
     }
 }
