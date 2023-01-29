@@ -49,6 +49,7 @@ namespace ECommerceApi.Persistance.Repositories
         }
         public async Task<T> GetByIdAsync(string id, bool tracking = true)
         // => await Table.FirstOrDefaultAsync(p => p.Id == Guid.Parse(id));
+
         //Asquarable da Find methodu ishlenmir
 
         {

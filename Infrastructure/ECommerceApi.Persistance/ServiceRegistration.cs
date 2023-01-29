@@ -22,6 +22,7 @@ namespace ECommerceApi.Persistance
 
             services.AddScoped<ICustomerReadRepository, CustomerReadRepository>();
             services.AddScoped<ICustomerWriteRepository, CustomerWriteRepository>();
+            //
 
         }
 
